@@ -1,0 +1,74 @@
+[
+    {
+        "id":"1",
+        "course_name": " C++ Programming",
+        "course_credit": 1,
+        "price": 15000,
+        "details": "C++ is the most used and most popular programming language developed by Bjarne Stroustrup.",
+        "image": "https://i.ibb.co/L6NFQdf/Rectangle-2-4.png"
+    },
+    {
+        "id":"2",
+        "course_name": "Data Structures ",
+        "course_credit": 2,
+        "price": 25000,
+        "details": "Explore advanced data structures and algorithms essential for software development.",
+        "image": "https://i.ibb.co/fF8h2xC/Rectangle-3.png"
+    },
+    {
+        "id":"3",
+        "course_name": " OOP & PYTHON",
+        "course_credit": 10,
+        "price": 10000,
+        "details": "Learn front-end and back-end web development technologies and build real-world projects.",
+        "image": "https://i.ibb.co/W32rGxK/Rectangle-2.png"
+    },
+    {
+        "id":"4",
+        "course_name": "Machine Learning ",
+        "course_credit": 5,
+        "price": 35000,
+        "details": "An introduction to machine learning concepts and techniques.",
+        "image": "https://i.ibb.co/W5LMBpT/Rectangle-2-6.png"
+    },
+    {
+        "id":"5",
+        "course_name": "Database Management",
+        "course_credit": 5,
+        "price": 19000,
+        "details": "Learn how to design, implement, and manage relational databases.",
+        "image": "https://i.ibb.co/WcMcRJ0/Rectangle-2-1.png"
+    },
+    {
+        "id":"6",
+        "course_name": "Algorithom",
+        "course_credit": 3,
+        "price": 23000,
+        "details": "In computer programming terms, an algorithm is a set of well-defined instructions to solve a particular problem. ",
+        "image": "https://i.ibb.co/TBkVzFQ/Rectangle-2-3.png"
+    },
+    {
+        "id":"7",
+        "course_name": "Artificial Intelligence",
+        "course_credit": 5,
+        "price": 35000,
+        "details": "Explore practical AI applications in various fields like healthcare and finance.",
+        "image": "https://i.ibb.co/HtmzWBt/download.jpg"
+    },
+    {
+        "id":"8",
+        "course_name": "Cloud Computing  with AWS",
+        "course_credit": 5,
+        "price": 19000,
+        "details": "Learn about cloud computing platforms and services for scalable applications.",
+        "image": "https://i.ibb.co/gjr6wsB/Rectangle-3-1.png"
+    },
+    {
+        "id":"9",
+        "course_name": "Software Engineering ",
+        "course_credit": 4,
+        "price": 23000,
+        "details": "Discover best practices in software development, testing, and maintenance.",
+        "image": "https://i.ibb.co/PgvkLMT/Rectangle-2-5.png"
+    }
+]
