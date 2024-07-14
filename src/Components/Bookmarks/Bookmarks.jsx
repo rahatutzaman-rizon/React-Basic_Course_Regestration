@@ -1,32 +1,40 @@
+import React from 'react';
+import { Card, ListGroup, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import Bookmark from '../Bookmark/Bookmark';
+import { useTheme } from '../ThemeContext/ThemeContext';
 
-import PropTypes from 'prop-types'
-import Bookmark from '../Bookmark/Bookmark'
-import './Bookmarks.css'
-const Bookmarks = ({bookmarks,remaining ,totalCost,price})=> {
-  
-  return ( 
-    <div className='cart-container'>
-    <h4 className='text-blue-500 text-2xl font-medium '> Remaining course hour {remaining}</h4>
-    {
-    bookmarks.map(bookmark=><Bookmark
-    key={bookmarks.id}
-    bookmark={bookmark}
-    
-    ></Bookmark>
+const Bookmarks = ({ bookmarks, remaining, totalCost, price, removeBookmark }) => {
+  const { theme } = useTheme();
 
-    )
-}
-    <h5 className='my-4 divide-y divide-blue-200'> Total credit Hour  {totalCost}</h5>
-    <h4 className='divide-lime-600'>Total Price:   {price} usd</h4>
-   
+  return (
+    <Card bg={theme} text={theme === 'dark' ? 'light' : 'dark'}>
+      <Card.Body>
+        <Card.Title>Course Summary</Card.Title>
+        <Card.Text>Remaining credit hours: {remaining}</Card.Text>
+        <ListGroup variant="flush">
+          {bookmarks.map(bookmark => (
+            <Bookmark 
+              key={bookmark.id} 
+              bookmark={bookmark} 
+              removeBookmark={removeBookmark}
+            />
+          ))}
+        </ListGroup>
+        <Card.Text className="mt-3">Total credit hours: {totalCost}</Card.Text>
+        <Card.Text>Total Price: ${price}</Card.Text>
+        <Button variant="success" className="mt-3">Checkout</Button>
+      </Card.Body>
+    </Card>
+  );
+};
 
-    </div>
-   
-  )
-}
+Bookmarks.propTypes = {
+  bookmarks: PropTypes.array.isRequired,
+  remaining: PropTypes.number.isRequired,
+  totalCost: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  removeBookmark: PropTypes.func.isRequired
+};
 
-Bookmarks.propTypes = { 
-    bookmarks:PropTypes.array
-}
-
-export default Bookmarks
+export default Bookmarks;

@@ -1,11 +1,20 @@
-
+import React from 'react';
+import { Navbar, Container, Button } from 'react-bootstrap';
+import { useTheme } from '../ThemeContext/ThemeContext';
 
 const Header = () => {
-    return (
-        <div className="flex justify-center text-black-700 text-4xl font-bold my-8">
-            <h2>Course Regestration</h2>
-        </div>
-    );
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Navbar bg={theme} variant={theme} expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">Course Registration</Navbar.Brand>
+        <Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+          Toggle Theme
+        </Button>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default Header;

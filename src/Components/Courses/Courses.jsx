@@ -1,32 +1,23 @@
-import { useEffect } from "react";
-import { useState } from "react";
-import Course from "../Course/Course";
-import PropTypes from 'prop-types'
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import Course from '../Course/Course';
+import PropTypes from 'prop-types';
 
-const Courses = ({handlebookmark}) => {
-    const [courses,setCourses]=useState([]);
-
-    useEffect( ()=>{
-        fetch('course.json')
-        .then(res=>res.json())
-        .then(data=> setCourses(data));
-        },[])
-    return (
-        <div className=" grid grid-cols-3 gap-4">
-        
-        {
-          courses.map(course=><Course  
-          key={course.id} 
-          course={course}
-          handlebookmark={handlebookmark}
-          ></Course>)
-        }
-            
-        </div>
-    );
+const Courses = ({ courses, handleBookmark }) => {
+  return (
+    <Row xs={1} md={2} lg={3} className="g-4">
+      {courses.map(course => (
+        <Col key={course.id}>
+          <Course course={course} handleBookmark={handleBookmark} />
+        </Col>
+      ))}
+    </Row>
+  );
 };
 
-Courses.propTypes={
-    handlebookmark:PropTypes.func
-}
+Courses.propTypes = {
+  courses: PropTypes.array.isRequired,
+  handleBookmark: PropTypes.func.isRequired
+};
+
 export default Courses;
