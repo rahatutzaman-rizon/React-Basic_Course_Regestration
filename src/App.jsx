@@ -1,9 +1,8 @@
-import  { useState, useEffect, useCallback, useReducer, useMemo, useTransition } from 'react';
-import { Container, Row, Col, Card, Badge, Alert, ProgressBar, Navbar, Nav } from 'react-bootstrap';
+import React, { useState, useEffect, useCallback, useReducer, useMemo, useTransition } from 'react';
+import { Container, Row, Col, Card, Badge, Alert, ProgressBar, Navbar, Nav, ListGroup, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
 import Courses from './Components/Courses/Courses';
-import Header from './Components/Header/Header';
 import Bookmarks from './Components/Bookmarks/Bookmarks';
 import SearchBar from './Components/SearchBar/SearchBar';
 import { ThemeProvider } from './Components/ThemeContext/ThemeContext';
@@ -92,7 +91,6 @@ function App() {
     setSearchTerm(term);
     startTransition(() => {
       // Filter courses based on search term
-      // This is wrapped in startTransition to avoid blocking the UI
     });
   }, []);
 
@@ -110,81 +108,104 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-        <Container>
-          <Navbar.Brand href="#home">Course Planner With Rahatutzaman Rizon</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              
-            </Nav>
-            <OnlineStatus />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <div style={{ backgroundColor: '#f0f8ff', minHeight: '100vh' }}>
+        <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
+          <Container>
+            <Navbar.Brand href="#home" style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+              Course Planner by Rahatutzaman Rizon
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/">Home</Nav.Link>
+              </Nav>
+              <OnlineStatus />
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
 
-      <Container fluid className="mt-4">
-        <Row className="mb-4">
-          <Col md={8}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Course Search</Card.Title>
-                <SearchBar onSearch={handleSearch} />
-                {isPending && <Alert variant="info" className="mt-2">Updating list...</Alert>}
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Session Info</Card.Title>
-                <p>Duration: {sessionTime} seconds</p>
-                <ProgressBar now={(state.totalCost / 20) * 100} label={`${state.totalCost}/20 credits`} />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={8}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Available Courses</Card.Title>
-                <Courses 
-                  courses={filteredCourses} 
-                  handleBookmark={handleBookmark} 
-                />
-                {mostExpensiveCourse && (
-                  <Alert variant="info" className="mt-3">
-                    Most expensive course: <strong>{mostExpensiveCourse.course_name}</strong>
+        <Container fluid className="mt-4">
+          <Row className="mb-4">
+            <Col md={8}>
+              <Card className="shadow-sm" style={{ backgroundColor: '#e6f7ff', borderColor: '#1890ff' }}>
+                <Card.Body>
+                  <Card.Title className="text-primary">Course Search</Card.Title>
+                  <SearchBar onSearch={handleSearch} />
+                  {isPending && <Alert variant="info" className="mt-2">Updating list...</Alert>}
+                  <Alert variant="secondary" className="mt-2">
+                    <strong>Hooks used:</strong> useCallback, useTransition
+                    <br />
+                    useCallback optimizes the search function, while useTransition improves UI responsiveness during search.
                   </Alert>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card>
-              <Card.Body>
-                <Card.Title>Your Bookmarks</Card.Title>
-                <Bookmarks
-                  bookmarks={state.bookmarks}
-                  remaining={state.remaining}
-                  totalCost={state.totalCost}
-                  price={state.price}
-                  removeBookmark={removeBookmark}
-                />
-                <Alert variant="warning" className="mt-3">
-                  Remaining Credits: <Badge bg="secondary">{state.remaining}</Badge>
-                </Alert>
-                <Alert variant="success">
-                  Total Cost: <Badge bg="secondary">${state.price.toFixed(2)}</Badge>
-                </Alert>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={4}>
+              <Card className="shadow-sm" style={{ backgroundColor: '#fffbe6', borderColor: '#faad14' }}>
+                <Card.Body>
+                  <Card.Title className="text-warning">Session Info</Card.Title>
+                  <p>Duration: {sessionTime} seconds</p>
+                  <ProgressBar now={(state.totalCost / 20) * 100} label={`${state.totalCost}/20 credits`} variant="warning" />
+                  <Alert variant="secondary" className="mt-2">
+                    <strong>Hooks used:</strong> useState, useEffect
+                    <br />
+                    useState manages session time, while useEffect sets up the timer.
+                  </Alert>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={8}>
+              <Card className="shadow-sm" style={{ backgroundColor: '#f6ffed', borderColor: '#52c41a' }}>
+                <Card.Body>
+                  <Card.Title className="text-success">Available Courses</Card.Title>
+                  <Courses 
+                    courses={filteredCourses} 
+                    handleBookmark={handleBookmark} 
+                  />
+                  {mostExpensiveCourse && (
+                    <Alert variant="info" className="mt-3">
+                      Most expensive course: <strong>{mostExpensiveCourse.course_name}</strong>
+                    </Alert>
+                  )}
+                  <Alert variant="secondary" className="mt-2">
+                    <strong>Hooks used:</strong> useMemo
+                    <br />
+                    useMemo optimizes the filtering of courses and calculation of the most expensive course.
+                  </Alert>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={4}>
+              <Card className="shadow-sm" style={{ backgroundColor: '#fff1f0', borderColor: '#ff4d4f' }}>
+                <Card.Body>
+                  <Card.Title className="text-danger">Your Bookmarks</Card.Title>
+                  <Bookmarks
+                    bookmarks={state.bookmarks}
+                    remaining={state.remaining}
+                    totalCost={state.totalCost}
+                    price={state.price}
+                    removeBookmark={removeBookmark}
+                  />
+                  <Alert variant="warning" className="mt-3">
+                    Remaining Credits: <Badge bg="secondary">{state.remaining}</Badge>
+                  </Alert>
+                  <Alert variant="success">
+                    Total Cost: <Badge bg="secondary">${state.price.toFixed(2)}</Badge>
+                  </Alert>
+                  <Alert variant="secondary" className="mt-2">
+                    <strong>Hooks used:</strong> useReducer, useCallback
+                    <br />
+                    useReducer manages the complex state for bookmarks, while useCallback optimizes the bookmark removal function.
+                  </Alert>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </ThemeProvider>
   );
 }
